@@ -8,6 +8,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
+
 type FormValues = {
   username: string;
   password: string;
@@ -41,13 +42,15 @@ const FormRegister = () => {
         router.push("/");
       }, 3000);
       
-    } catch (error: any) {
-      const message =
-        error.res?.data?.error || "Akun gagal dibuat.";
-      setErrorMessage(message);
-      setTimeout(() => {
-        setErrorMessage("");
-      }, 3000);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error) && error.response) {
+        const message =
+          error.response.data?.error || "Terjadi kesalahan saat login.";
+        setErrorMessage(message);
+          setTimeout(() => {
+            setErrorMessage("");
+          }, 3000);
+      }
     } finally {
       setIsLoading(false);
     }

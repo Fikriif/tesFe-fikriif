@@ -135,7 +135,7 @@ const FormLogin = () => {
             </button>
           </div>
           <div className="flex justify-center text-sm py-3">
-            <span className='mr-1'>Don't have an account?</span>{" "}
+            <span className="mr-1">Don&apos;t have an account?</span>{" "}
             <Link href="/pages/register" className="underline text-blue-600">
               Register
             </Link>
