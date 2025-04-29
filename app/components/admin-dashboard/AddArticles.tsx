@@ -15,7 +15,6 @@ const AddArticles = ({
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
   const [categories, setCategories] = useState<Category[]>([]);
   const [content, setContent] = useState<string>("");
   const [title, setTitle] = useState<string>("");
@@ -97,7 +96,7 @@ const AddArticles = ({
     };
 
     fetchCategories();
-  }, [searchTerm, selectedCategory]);
+  }, [ selectedCategory]);
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(e.target.value);

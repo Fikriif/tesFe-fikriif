@@ -1,6 +1,6 @@
 "use client";
 
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import TopBar from "../TopBar";
 import Avatar from "../Avatar";
 import axios from "axios";

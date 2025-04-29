@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import axios from "axios";
-import { set } from "lodash";
 
 interface EditArticlesProps {
   articleId: string | null;
@@ -18,12 +17,9 @@ const EditArticles: React.FC<EditArticlesProps> = ({
   articleId,
   setActivePage,
 }) => {
-  const [article, setArticle] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
   const [categories, setCategories] = useState<Category[]>([]);
   const [content, setContent] = useState<string>("");
   const [title, setTitle] = useState<string>("");
@@ -48,7 +44,6 @@ const EditArticles: React.FC<EditArticlesProps> = ({
           const response = await axios.get(
             `${process.env.NEXT_PUBLIC_API_URL}/articles/${articleId}`
           );
-          setArticle(response.data.id);
           setTitle(response.data.title);
           setPreviewImage(response.data.imageUrl);
           setContent(response.data.content);
@@ -75,7 +70,7 @@ const EditArticles: React.FC<EditArticlesProps> = ({
     };
 
     fetchCategories();
-  }, [searchTerm, selectedCategory]);
+  }, [selectedCategory]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

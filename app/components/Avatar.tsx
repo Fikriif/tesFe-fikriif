@@ -1,5 +1,5 @@
 type AvatarProps = {
-  name: string | any;
+  name: string;
 };
 
 const Avatar = ({ name }: AvatarProps) => {

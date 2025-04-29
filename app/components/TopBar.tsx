@@ -34,7 +34,11 @@ const TopBar = ({
   const router = useRouter();
 
   const handleMyAccount = () => {
-    {role === "Admin" ? setActivePage("User Profile") : router.push("/pages/profile")}
+    if (role === "Admin") {
+      setActivePage("User Profile");
+    } else {
+      router.push("/pages/profile");
+    }
     setIsModalOpen(false);
   };
 

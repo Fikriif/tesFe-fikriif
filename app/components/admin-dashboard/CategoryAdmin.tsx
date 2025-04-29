@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ModalAddCategory from "./ModalAddCategory";
-import { set } from "lodash";
 import ModalDelete from "./ModalDelete";
 import ModalEdit from "./ModalEdit";
 

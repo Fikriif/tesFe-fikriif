@@ -32,15 +32,16 @@ const FormLogin = () => {
         `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
         data
       );
-      localStorage.setItem('token', loginRes.data.token);
-      const token = localStorage.getItem('token');
+      localStorage.setItem("token", loginRes.data.token);
+      const token = localStorage.getItem("token");
       const profileRes = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/profile`, {
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/profile`,
+        {
           headers: {
             Authorization: `Bearer ${token}`,
-          }
+          },
         }
-      )
+      );
 
       const role = profileRes.data.role;
 
@@ -51,13 +52,17 @@ const FormLogin = () => {
       } else {
         alert("Role tidak dikenali");
       }
-    } catch (error: any) {
-      const message =
-        error.response?.data?.error || "Terjadi kesalahan saat login.";
-      setErrorMessage(message);
-      setTimeout(() => {
-        setErrorMessage("");
-      }, 3000);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error) && error.response) {
+        const message =
+          error.response.data?.error || "Terjadi kesalahan saat login.";
+        setErrorMessage(message);
+          setTimeout(() => {
+            setErrorMessage("");
+          }, 3000);
+      } else {
+        setErrorMessage("Terjadi kesalahan saat login.");
+      }
     } finally {
       setIsLoading(false);
     }

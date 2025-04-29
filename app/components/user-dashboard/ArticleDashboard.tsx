@@ -21,7 +21,6 @@ interface Article {
 const ArticleDashboard = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [totalArticles, setTotalArticles] = useState(0);
-  const [selectedCategoryId, setSelectedCategoryId] = useState("");
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -32,7 +31,6 @@ const ArticleDashboard = () => {
             params: {
               page: 1,
               limit: 10,
-              categoryId: selectedCategoryId || undefined, // hanya dikirim kalau ada kategori
             },
           }
         );
@@ -44,7 +42,7 @@ const ArticleDashboard = () => {
     };
 
     fetchArticles();
-  }, [selectedCategoryId]);
+  }, []);
 
   return (
     <div>

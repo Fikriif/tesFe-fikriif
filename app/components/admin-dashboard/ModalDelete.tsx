@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useState } from "react";
 
 interface ModalDeleteProps {
   id: string;

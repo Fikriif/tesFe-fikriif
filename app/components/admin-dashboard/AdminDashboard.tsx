@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import TopBar from "../TopBar";
 import Sidebar from "../Sidebar";
 import ModalLogout from "../ModalLogout";
