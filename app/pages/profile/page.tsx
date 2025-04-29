@@ -6,7 +6,7 @@ const page = () => {
   return (
     <div>
       <ProtectedRoute>
-        <Profile />
+        <Profile setActivePage={() => {}}/>
       </ProtectedRoute>
     </div>
   )
