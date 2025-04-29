@@ -8,7 +8,6 @@ import ArticleDashboard from "./ArticleDashboard";
 import FooterUserDashboard from "./FooterUserDashboard";
 
 const UserDashboard = () => {
-  const [selectedCategoryId, setSelectedCategoryId] = React.useState("");
   
   return (
     <div>

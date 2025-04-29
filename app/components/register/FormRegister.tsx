@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import FormAuth from "../FormAuth";
 import { useState } from "react";
 import axios from "axios";

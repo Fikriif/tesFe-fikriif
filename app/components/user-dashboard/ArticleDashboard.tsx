@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
-import { set } from "react-hook-form";
 import Link from "next/link";
 
 interface Article {
