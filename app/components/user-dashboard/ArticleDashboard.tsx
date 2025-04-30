@@ -21,6 +21,15 @@ interface Article {
 const ArticleDashboard = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [totalArticles, setTotalArticles] = useState(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(1);
+  const [limit] = useState<number>(10);
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -29,20 +38,22 @@ const ArticleDashboard = () => {
           `${process.env.NEXT_PUBLIC_API_URL}/articles`,
           {
             params: {
-              page: 1,
-              limit: 10,
+              page: currentPage,
+              limit: limit,
             },
           }
         );
         setArticles(res.data.data);
         setTotalArticles(res.data.total);
+        const totalPagesCalculated = Math.ceil(res.data.total / limit);
+        setTotalPages(totalPagesCalculated);
       } catch (error) {
         console.error("Error fetching articles:", error);
       }
     };
 
     fetchArticles();
-  }, []);
+  }, [currentPage, limit]);
 
   return (
     <div>
@@ -50,7 +61,6 @@ const ArticleDashboard = () => {
       <div className="flex justify-center items-center">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 p-2 ">
           {articles.map((article) => (
-
             <Link
               key={article.id}
               href={`/pages/article/${article.id}`}
@@ -77,6 +87,29 @@ const ArticleDashboard = () => {
             </Link>
           ))}
         </div>
+      </div>
+      <div className="flex justify-center gap-2 py-8">
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="px-4 py-2 rounded-md"
+        >
+          {"<"} Previous
+        </button>
+        <span className="px-4 py-2">
+          Page{" "}
+          <span className="border border-gray-400 rounded-sm py-3 px-4">
+            {currentPage}
+          </span>{" "}
+          of {totalPages}
+        </span>
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="px-4 py-2 rounded-md"
+        >
+          Next {">"}
+        </button>
       </div>
     </div>
   );
